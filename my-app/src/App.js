@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 function App() {
   const[flag, setFlag] = useState(true);
   const [signer, setSigner] = useState(0);
+  const [chainId, setChainId] = useState(0);
 
   if(!window.ethereum){
     return(
@@ -22,6 +23,7 @@ function App() {
     else{
       setFlag(true);
       setSigner(provider.getSigner());
+      signer.getChainId().then((id) => setChainId(id)).catch(( ) =>{});
     }
   }
   
@@ -37,9 +39,15 @@ function App() {
       </div>
     );
   }
+
   return (
     <div>
-      Nasik
+      <button disabled={chainId==Number(process.env.REACT_APP_GOERLI_CHAIN_ID)} onClick={async () => await provider.send('wallet_switchEthereumChain', [{chainId: ethers.utils.hexValue(Number(process.env.REACT_APP_GOERLI_CHAIN_ID))}])}>
+          Change your chain to Goerli ({process.env.REACT_APP_GOERLI_CHAIN_ID})  
+      </button>
+      <button disabled={chainId==Number(process.env.REACT_APP_MUMBAI_CHAIN_ID)} onClick={async () => await provider.send('wallet_switchEthereumChain', [{chainId: ethers.utils.hexValue(Number(process.env.REACT_APP_MUMBAI_CHAIN_ID))}])}>
+          Change your chain to Mumbai ({process.env.REACT_APP_MUMBAI_CHAIN_ID}) 
+      </button>
     </div>
   );
 }
