@@ -12,11 +12,9 @@ export function useMetaMask() {
     const [countOfAccounts, setCountOfAccounts] = React.useState(0);
     const [chainId, setChainId] = React.useState(0);
 
-    const connectMetaMask = async () => {
-        await provider.send('eth_requestAccounts', []);
-    };
+    const connectMetaMask = async () => await provider.send('eth_requestAccounts', []);
 
-    const switchChain = async (chainIdNumberAsString) => {
+    const switchChain = async (chainIdNumberAsString) => 
         await provider.send(
             'wallet_switchEthereumChain', 
             [
@@ -25,7 +23,6 @@ export function useMetaMask() {
                 }
             ]
         );
-    };
 
     provider
         .send('eth_accounts', [])
