@@ -30,6 +30,7 @@ function App() {
   function connectWallet(){
       provider.send('eth_requestAccounts', [])
   }
+
   if(!flag){
     return (
       <div>
@@ -39,6 +40,8 @@ function App() {
       </div>
     );
   }
+
+
 
   return (
     <div>
