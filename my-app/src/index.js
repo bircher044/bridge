@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MetaMask from './components/MetaMask';
+import Bridge from './components/Bridge';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MetaMask>
+      <Bridge/>
+    </MetaMask>
   </React.StrictMode>
 );
 
